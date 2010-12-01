@@ -8,5 +8,3 @@
     [0 1]
     (let [[x y] (extended-gcd b (mod a b))]
       [y (- x (* y (/ a b)))])))
-
-(println (str (extended-gcd 3120 17)))
