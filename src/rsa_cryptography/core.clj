@@ -1,6 +1,10 @@
 (ns rsa-cryptography.core
   (:use [clojure.contrib.math]))
 
+(defn big-integer [int]
+  ;; todo(topher): there must be a better way than int -> string -> BigInteger
+  (new BigInteger (str int)))
+
 (defn division-with-remainder [x y]
   [(floor (/ x y)) (mod x y)])
 
@@ -20,7 +24,7 @@
   http://numericalrecipes.blogspot.com/2009/03/modular-multiplicative-inverse.html"
   [a m]
   (let [[x y] (extended-gcd a m)]
-    (mod x m)))
+    (big-integer (mod x m))))
 
 (defn find-prime [bit-length]
   (. BigInteger (probablePrime bit-length (new java.util.Random))))
@@ -34,12 +38,12 @@
      A. 1 < e < totient
      B. coprime to the totient"
   [totient]
-  (let [e 65537]
+  (let [e (big-integer 65537)]
     (if (not= 0 (mod totient e)) e)))
 
 (defn generate-keys [bit-length]
   (let [[p q] (repeatedly 2 #(find-prime bit-length))
-        modulus (* p q)
+        modulus (. p (multiply q))
         totient (generate-totient p q)
         encrypt-key (generate-encrypt-key totient)
         decrypt-key (modular-multiplicative-inverse encrypt-key totient)]
