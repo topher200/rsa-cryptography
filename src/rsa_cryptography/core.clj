@@ -35,7 +35,7 @@
      B. coprime to the totient"
   [totient]
   (let [e 65537]
-    (if (not= e totient) e)))
+    (if (not= 0 (mod totient e)) e)))
 
 (defn generate-keys [bit-length]
   (let [[p q] (repeatedly 2 #(find-prime bit-length))
