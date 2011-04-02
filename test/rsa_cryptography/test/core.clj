@@ -23,10 +23,10 @@
   (is (= 3120 (generate-totient 61 53))))
 
 (deftest encrypt-message-test
-  (is (= 2790 (encrypt-message 65 3233 17))))
+  (is (= 2790 (encrypt-message 65 17 3233))))
 
 (deftest decrypt-message-test
-  (is (= 65 (decrypt-message 2790 3233 2753))))
+  (is (= 65 (decrypt-message 2790 2753 3233))))
 
 (deftest encrypt-and-decrypt-test
-  (is (= 65 (decrypt-message (encrypt-message 65 3233 17) 3233 2753))))
+  (is (= 65 (decrypt-message (encrypt-message 65 3233 17) 2753 3233))))
