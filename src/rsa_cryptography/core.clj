@@ -49,10 +49,20 @@
         decrypt-key (modular-multiplicative-inverse encrypt-key totient)]
     [modulus encrypt-key decrypt-key]))
 
+(defn encrypt-message-big-integer
+  [message encrypt-key modulus]
+  (. message (modPow encrypt-key modulus)))
+
 (defn encrypt-message
   [message encrypt-key modulus]
-  (mod (expt message encrypt-key) modulus))
+  (apply encrypt-message-big-integer
+         (map big-integer [message encrypt-key modulus])))
+
+(defn decrypt-message-big-integer
+  [message decrypt-key modulus]
+  (. message (modPow decrypt-key modulus)))
 
 (defn decrypt-message
   [message decrypt-key modulus]
-  (mod (expt message decrypt-key) modulus))
+  (apply decrypt-message-big-integer
+         (map big-integer [message decrypt-key modulus])))
