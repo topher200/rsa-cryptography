@@ -45,8 +45,8 @@
 
 (defn generate-keys []
   (let [[p q] (repeatedly 2 #(find-prime 100))
-        n (* p q)
+        modulus (* p q)
         totient (generate-totient p q)
         encrypt-key (generate-encrypt-key totient)
         decrypt-key (modular-multiplicative-inverse encrypt-key totient)]
-    [encrypt-key decrypt-key]))
+    [modulus encrypt-key decrypt-key]))
