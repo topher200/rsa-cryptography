@@ -48,7 +48,7 @@
         totient (generate-totient p q)
         encrypt-key (generate-encrypt-key totient)
         decrypt-key (modular-multiplicative-inverse encrypt-key totient)]
-    [modulus encrypt-key decrypt-key]))
+    (hash-map :modulus modulus :e encrypt-key :d decrypt-key)))
 
 (defn encrypt-message-big-integer
   [message encrypt-key modulus]

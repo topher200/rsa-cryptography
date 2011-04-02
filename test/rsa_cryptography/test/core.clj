@@ -32,7 +32,8 @@
   (is (= 65 (decrypt-message (encrypt-message 65 17 3233) 2753 3233))))
 
 (deftest encrypt-and-decrypt-random-message-test
-  (let [[modulus e d] (generate-keys 16)
+  (let [keys (generate-keys 16)
         message (rand-int 100000)]
-    (is (= message (decrypt-message (encrypt-message message e modulus)
-                                    d modulus)))))
+    (is (= message (decrypt-message (encrypt-message message
+                                                     (:e keys) (:modulus keys))
+                                    (:d keys) (:modulus keys))))))
