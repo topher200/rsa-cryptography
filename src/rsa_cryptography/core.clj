@@ -37,8 +37,8 @@
   (let [e (find-prime totient)]
     (if (not= e totient) e (generate-encrypt-key totient))))
 
-(defn generate-keys []
-  (let [[p q] (repeatedly 2 #(find-prime 100))
+(defn generate-keys [bit-length]
+  (let [[p q] (repeatedly 2 #(find-prime bit-length))
         modulus (* p q)
         totient (generate-totient p q)
         encrypt-key (generate-encrypt-key totient)
