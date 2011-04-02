@@ -21,3 +21,6 @@
 
 (deftest generate-totient-test
   (is (= 3120 (generate-totient 61 53))))
+
+(deftest encrypt-message-test
+  (is (= 2790 (encrypt-message 65 3233 17))))

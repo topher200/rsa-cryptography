@@ -50,3 +50,7 @@
         encrypt-key (generate-encrypt-key totient)
         decrypt-key (modular-multiplicative-inverse encrypt-key totient)]
     [modulus encrypt-key decrypt-key]))
+
+(defn encrypt-message
+  [message modulus encrypt-key]
+  (mod (expt message encrypt-key) modulus))
