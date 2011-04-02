@@ -34,8 +34,8 @@
      A. 1 < e < totient
      B. coprime to the totient"
   [totient]
-  (let [e (find-prime totient)]
-    (if (not= e totient) e (generate-encrypt-key totient))))
+  (let [e 65537]
+    (if (not= e totient) e)))
 
 (defn generate-keys [bit-length]
   (let [[p q] (repeatedly 2 #(find-prime bit-length))
