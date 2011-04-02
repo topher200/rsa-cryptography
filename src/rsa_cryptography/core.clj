@@ -27,10 +27,9 @@
 
 (defn find-prime [max]
   "Determines a prime n: (max - sqrt(max)) < n < max"
-  (let [possible-prime (- max (rand-int (sqrt max)))]
-    (if (prime? possible-prime)
-      possible-prime
-      (find-prime max)))) ;; todo(topher)- should be loop/recur
+  (loop []
+      (let [possible-prime (- max (rand-int (sqrt max)))]
+        (if (prime? possible-prime) possible-prime (recur)))))
 
 (defn generate-totient
   "RSA Wikipedia example, step 3"
