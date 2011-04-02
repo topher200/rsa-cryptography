@@ -22,14 +22,17 @@
   (let [[x y] (extended-gcd a m)]
     (mod x m)))
 
+(defn rand-large-int [int]
+  (round (* (rand) int)))
+
 (defn prime? [n]
   (not-any? #(= (mod n %) 0) (take (sqrt n) (iterate inc 2))))
 
 (defn find-prime [bit-length]
-  "Determines a prime n: (max - sqrt(max)) < n < max"
+  "Finds a prime n: (2^(bit-length-1)) < n < 2^bit-length"
   (loop []
     (let [possible-prime (+ (expt 2 (dec bit-length))
-                            (rand-int (expt 2 (dec bit-length))))]
+                            (rand-large-int (expt 2 (dec bit-length))))]
       (if (prime? possible-prime) possible-prime (recur)))))
 
 (defn generate-totient
