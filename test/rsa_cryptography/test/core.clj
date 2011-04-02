@@ -18,3 +18,6 @@
 
 (deftest modular-multiplicative-inverse-test
   (is (= 2753 (modular-multiplicative-inverse 17 3120))))
+
+(deftest generate-totient-test
+  (is (= 3120 (generate-totient 61 53))))

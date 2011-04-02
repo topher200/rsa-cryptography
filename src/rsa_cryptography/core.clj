@@ -21,3 +21,32 @@
   [a m]
   (let [[x y] (extended-gcd a m)]
     (mod x m)))
+
+(def run 0)
+(defn find-prime [max]
+  (last (doall [(def run (inc run))
+          (case run
+                0 0
+                1 61
+                2 53
+                3 17)])))
+
+(defn generate-totient
+  "RSA Wikipedia example, step 3"
+  [p q] (* (- p 1) (- q 1)))
+
+(defn generate-encrypt-key
+  "Determines a prime encrypt key (e) that satisfies:
+     A. 1 < e < totient
+     B. coprime to the totient"
+  [totient]
+  (let [e (find-prime totient)]
+    (if (not= e totient) e (generate-encrypt-key totient))))
+
+(defn generate-keys []
+  (let [[p q] (repeatedly 2 #(find-prime 100))
+        n (* p q)
+        totient (generate-totient p q)
+        encrypt-key (generate-encrypt-key totient)
+        decrypt-key (modular-multiplicative-inverse encrypt-key totient)]
+    [encrypt-key decrypt-key]))
