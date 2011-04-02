@@ -22,12 +22,6 @@
   (let [[x y] (extended-gcd a m)]
     (mod x m)))
 
-(defn rand-large-int [int]
-  (round (* (rand) int)))
-
-(defn prime? [n]
-  (not-any? #(= (mod n %) 0) (take (sqrt n) (iterate inc 2))))
-
 (defn find-prime [bit-length]
   (. BigInteger (probablePrime bit-length (new java.util.Random))))
 

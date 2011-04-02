@@ -19,14 +19,6 @@
 (deftest modular-multiplicative-inverse-test
   (is (= 2753 (modular-multiplicative-inverse 17 3120))))
 
-(deftest prime?-test
-  (true? (prime? 1))
-  (true? (prime? 2))
-  (true? (prime? 3))
-  (false? (prime? 4))
-  (true? (prime? 89))
-  (false? (prime? 100)))
-
 (deftest generate-totient-test
   (is (= 3120 (generate-totient 61 53))))
 
