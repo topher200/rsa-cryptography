@@ -25,11 +25,12 @@
 (defn prime? [n]
   (not-any? #(= (mod n %) 0) (take (sqrt n) (iterate inc 2))))
 
-(defn find-prime [max]
+(defn find-prime [bit-length]
   "Determines a prime n: (max - sqrt(max)) < n < max"
   (loop []
-      (let [possible-prime (- max (rand-int (sqrt max)))]
-        (if (prime? possible-prime) possible-prime (recur)))))
+    (let [possible-prime (+ (expt 2 (dec bit-length))
+                            (rand-int (expt 2 (dec bit-length))))]
+      (if (prime? possible-prime) possible-prime (recur)))))
 
 (defn generate-totient
   "RSA Wikipedia example, step 3"
