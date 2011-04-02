@@ -22,14 +22,15 @@
   (let [[x y] (extended-gcd a m)]
     (mod x m)))
 
-(def run 0)
+(defn prime? [n]
+  (not-any? #(= (mod n %) 0) (take (sqrt n) (iterate inc 2))))
+
 (defn find-prime [max]
-  (last (doall [(def run (inc run))
-          (case run
-                0 0
-                1 61
-                2 53
-                3 17)])))
+  "Determines a prime n: (max - sqrt(max)) < n < max"
+  (let [possible-prime (- max (rand-int (sqrt max)))]
+    (if (prime? possible-prime)
+      possible-prime
+      (find-prime max)))) ;; todo(topher)- should be loop/recur
 
 (defn generate-totient
   "RSA Wikipedia example, step 3"
