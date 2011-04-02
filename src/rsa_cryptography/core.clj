@@ -2,7 +2,8 @@
   (:use [clojure.contrib.math]))
 
 (defn big-integer [int]
-  ;; todo(topher): there must be a better way than int -> string -> BigInteger
+  ;; todo(topher): there must be a better way than int -> string -> BigInteger,
+  ;; but valueOf(int) doesn't seem to work
   (new BigInteger (str int)))
 
 (defn division-with-remainder [x y]
