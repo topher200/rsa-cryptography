@@ -54,3 +54,7 @@
 (defn encrypt-message
   [message modulus encrypt-key]
   (mod (expt message encrypt-key) modulus))
+
+(defn decrypt-message
+  [message modulus decrypt-key]
+  (mod (expt message decrypt-key) modulus))
