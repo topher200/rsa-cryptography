@@ -29,11 +29,7 @@
   (not-any? #(= (mod n %) 0) (take (sqrt n) (iterate inc 2))))
 
 (defn find-prime [bit-length]
-  "Finds a prime n: (2^(bit-length-1)) < n < 2^bit-length"
-  (loop []
-    (let [possible-prime (+ (expt 2 (dec bit-length))
-                            (rand-large-int (expt 2 (dec bit-length))))]
-      (if (prime? possible-prime) possible-prime (recur)))))
+  (. BigInteger (probablePrime bit-length (new java.util.Random))))
 
 (defn generate-totient
   "RSA Wikipedia example, step 3"
