@@ -30,6 +30,12 @@
 (defn find-prime [bit-length]
   (. BigInteger (probablePrime bit-length (new java.util.Random))))
 
+(defn find-two-unique-primes [bit-length]
+  (let [[p q] (repeatedly 2 #(find-prime bit-length))]
+    (if (not= p q) [p q]
+        ;; not using loop/recur so we get stack overflow instead of infinite loop
+        (find-two-unique-primes bit-length))))
+
 (defn generate-totient
   "RSA Wikipedia example, step 3"
   [p q] (* (- p 1) (- q 1)))
@@ -43,7 +49,7 @@
     (if (not= 0 (mod totient e)) e)))
 
 (defn generate-keys [bit-length]
-  (let [[p q] (repeatedly 2 #(find-prime bit-length))
+  (let [[p q] (find-two-unique-primes bit-length)
         modulus (. p (multiply q))
         totient (generate-totient p q)
         encrypt-key (generate-encrypt-key totient)
