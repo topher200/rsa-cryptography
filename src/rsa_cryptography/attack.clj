@@ -2,12 +2,12 @@
   (:use [rsa-cryptography.core] :reload))
 
 (defn message-round-trip
-  [message]
-  (let [keys (generate-keys 16)]
-    (decrypt-message (encrypt-message message (:e keys) (:modulus keys))
-                     (:d keys) (:modulus keys))))
+  [keys message]
+  (decrypt-message (encrypt-message message (:e keys) (:modulus keys))
+                   (:d keys) (:modulus keys)))
 
 (defn unchanged-round-trip
-  ([] (unchanged-round-trip (rand-int 25600)))
-  ([message] (= message (message-round-trip message))))
+  ([] (unchanged-round-trip (generate-keys 16)))
+  ([keys] (unchanged-round-trip keys (rand-int 25600)))
+  ([keys message] (= message (message-round-trip keys message))))
 
