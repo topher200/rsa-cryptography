@@ -51,10 +51,18 @@
 (defn generate-encrypt-key
   "Determines a prime encrypt key (e) that satisfies:
      A. 1 < e < totient
-     B. coprime to the totient"
+     B. coprime to the totient
+   First tries some common ones, then uses random primes."
   [totient]
-  (let [e (big-integer 65537)]
-    (if (not= 0 (mod totient e)) e)))
+  (let [check-e (fn [e totient] (and (coprime e totient) (< e totient)))]
+    (condp check-e totient
+      65537 65537
+      17 17
+      3 3
+      (loop [] (let [possible-e (find-prime (bit-length totient))]
+                 (if (check-e possible-e totient)
+                   possible-e
+                   (recur)))))))
 
 (defn generate-keys [bit-length]
   (let [[p q] (find-two-unique-primes bit-length)
