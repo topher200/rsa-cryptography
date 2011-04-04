@@ -14,7 +14,7 @@
 (defn generate-keys-list
   "Creates a list of keys based on _keys_, incrementing :d from _d-start_"
   ([] (generate-keys-list (generate-keys 16)))
-  ([keys] (generate-keys-list keys (- (:d keys) 5)))
+  ([keys] (generate-keys-list keys 0))
   ([keys d-start]
      (map #(assoc keys :d %) (iterate inc d-start))))
 
