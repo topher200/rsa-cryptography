@@ -12,11 +12,12 @@
   (is (unchanged-round-trip)))
 
 (deftest generate-keys-list-test
-  (is (= (generate-keys-list test-keys 100 3)
+  (is (= (take 3 (generate-keys-list test-keys 100))
          '({:d 100, :e 65537, :modulus 3306810623}
            {:d 101, :e 65537, :modulus 3306810623}
            {:d 102, :e 65537, :modulus 3306810623}))))
 
 (deftest check-solution-keys-test
-  (is (check-solution-keys (generate-keys-list test-keys)))
-  (is (not (check-solution-keys (generate-keys-list test-keys 100 1)))))
+  (is (check-solution-keys
+       (take 1 (generate-keys-list test-keys (:d test-keys)))))
+  (is (not (check-solution-keys (take 1 (generate-keys-list test-keys 100))))))

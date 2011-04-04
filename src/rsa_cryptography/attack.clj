@@ -12,11 +12,11 @@
   ([keys message] (= message (message-round-trip keys message))))
 
 (defn generate-keys-list
-  "Creates a list of _num_ keys based on _keys_, incrementing :d from _d-start_"
+  "Creates a list of keys based on _keys_, incrementing :d from _d-start_"
   ([] (generate-keys-list (generate-keys 16)))
-  ([keys] (generate-keys-list keys (- (:d keys) 5) 10))
-  ([keys d-start num]
-     (map #(assoc keys :d %) (take num (iterate inc d-start)))))
+  ([keys] (generate-keys-list keys (- (:d keys) 5)))
+  ([keys d-start]
+     (map #(assoc keys :d %) (iterate inc d-start))))
 
 (defn check-solution-keys
   "Checks if any keys in the list encryt/decrypt a message successfully"
