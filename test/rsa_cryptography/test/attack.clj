@@ -1,8 +1,15 @@
 (ns rsa-cryptography.test.attack
+  (:use [rsa-cryptography.core] :reload)
   (:use [rsa-cryptography.attack] :reload)
   (:use [clojure.test]))
 
 (def test-keys {:d 399707681, :e 65537, :modulus 3306810623})
+
+(deftest message-round-trip-test
+  (is (message-round-trip (generate-keys 16) 1001) 1001))
+
+(deftest unchanged-round-trip-test
+  (is (unchanged-round-trip)))
 
 (deftest generate-keys-list-test
   (is (= (generate-keys-list test-keys 100 3)
