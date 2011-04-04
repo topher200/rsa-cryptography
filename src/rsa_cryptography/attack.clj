@@ -18,3 +18,7 @@
   ([keys d-start num]
      (map #(assoc keys :d %) (take num (iterate inc d-start)))))
 
+(defn check-solution-keys
+  "Checks if any keys in the list encryt/decrypt a message successfully"
+  [keys-list]
+  (some unchanged-round-trip keys-list))
