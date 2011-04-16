@@ -11,7 +11,7 @@
 
 (defn unchanged-round-trip
   ([] (unchanged-round-trip (generate-keys 16)))
-  ([keys] (unchanged-round-trip keys (rand-int (:modulus keys))))
+  ([keys] (unchanged-round-trip keys (rand-big-int (:modulus keys))))
   ([keys message] (= message (message-round-trip keys message))))
 
 (defn generate-keys-list
