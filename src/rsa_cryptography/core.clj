@@ -41,7 +41,9 @@
 
 (defn generate-totient
   "RSA Wikipedia example, step 3"
-  [p q] (* (- p 1) (- q 1)))
+  [p q]
+  (let [decrement (fn [int] (. int (subtract (big-integer 1))))]
+    (. (decrement p) (multiply (decrement q)))))
 
 (defn generate-encrypt-key
   "Determines a prime encrypt key (e) that satisfies:
