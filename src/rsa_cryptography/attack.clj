@@ -22,6 +22,6 @@
      (map #(assoc keys :d %) (iterate inc d-start))))
 
 (defn check-solution-keys
-  "Checks if any keys in the list encryt/decrypt a message successfully"
+  "Returns all keys in the list that encryt/decrypt a message successfully"
   [keys-list]
-  (some unchanged-round-trip keys-list))
+  (filter unchanged-round-trip keys-list))
