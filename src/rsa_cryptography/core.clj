@@ -12,6 +12,9 @@
 (defn division-with-remainder [x y]
   [(floor (/ x y)) (mod x y)])
 
+(defn coprime [x y]
+  (= (gcd x y) 1))
+
 (defn extended-gcd
   "Returns the [x y] for the extended Euclidean algorithm. Found here:
   http://en.wikipedia.org/wiki/Extended_Euclidean_algorithm"
