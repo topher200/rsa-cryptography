@@ -5,6 +5,9 @@
 
 (def test-keys {:d 399707681, :e 65537, :modulus 3306810623})
 
+(deftest rand-big-int-test
+  (is (> 1000000 (rand-big-int 1000000))))
+
 (deftest message-round-trip-test
   (is (message-round-trip (generate-keys 16) 1001) 1001))
 

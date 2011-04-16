@@ -1,6 +1,9 @@
 (ns rsa-cryptography.attack
   (:use [rsa-cryptography.core] :reload))
 
+(defn rand-big-int [max]
+  (new BigInteger (dec (bit-length max)) (new java.util.Random)))
+
 (defn message-round-trip
   [keys message]
   (decrypt-message (encrypt-message message (:e keys) (:modulus keys))
