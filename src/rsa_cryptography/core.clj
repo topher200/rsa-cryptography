@@ -59,10 +59,12 @@
       65537 65537
       17 17
       3 3
-      (loop [] (let [possible-e (find-prime (bit-length totient))]
-                 (if (check-e possible-e totient)
-                   possible-e
-                   (recur)))))))
+      (let [possible-e (find-prime (bit-length totient))]
+        (if (check-e possible-e totient)
+          possible-e
+          ;; try again- recursive so we get a stack overflow instead of an
+          ;; infinite loop with loop/recur
+          (generate-encrypt-key totient))))))
 
 (defn generate-keys [bit-length]
   (let [[p q] (find-two-unique-primes bit-length)
