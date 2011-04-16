@@ -6,6 +6,9 @@
   ;; but valueOf(int) doesn't seem to work
   (new BigInteger (str int)))
 
+(defn bit-length [int]
+  (. (big-integer int) (bitLength)))
+
 (defn division-with-remainder [x y]
   [(floor (/ x y)) (mod x y)])
 
