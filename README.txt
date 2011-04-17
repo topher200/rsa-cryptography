@@ -14,6 +14,7 @@
 
    (ns repl (:use [rsa-cryptography.core]))
    (def my-keys (generate-keys 16))
+   >>> {:d 790211681, :e 65537, :modulus 2213643079}
 
    Now that you have keys, you can use them to manipulate messages.
 
