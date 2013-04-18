@@ -31,7 +31,7 @@
   http://numericalrecipes.blogspot.com/2009/03/modular-multiplicative-inverse.html"
   [a m]
   (let [[x y] (extended-gcd a m)]
-    (big-integer (mod x m))))
+    (big-integer (int (mod x m)))))
 
 (defn find-prime [bit-length]
   (. BigInteger (probablePrime bit-length (new java.util.Random))))
